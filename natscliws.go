@@ -68,6 +68,14 @@ func (mq *MQ) Publish(t string, pl []byte) error {
 	return mq.conn.Publish(t, pl)
 }
 
+func (mq *MQ) Flush() error {
+	return mq.conn.Flush()
+}
+
+func (mq *MQ) FlushTimeout(d time.Duration) error {
+	return mq.conn.FlushTimeout(d)
+}
+
 type MsgHandler func(msg *Msg)
 
 type Msg struct {

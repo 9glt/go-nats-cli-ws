@@ -39,6 +39,10 @@ type MQ struct {
 	conn *nats.Conn
 }
 
+func (mq *MQ) UnderlyingConn() *nats.Conn {
+	return mq.conn
+}
+
 func (mq *MQ) Subscribe(t string, cb MsgHandler) (*Subscription, error) {
 	sub, err := mq.conn.Subscribe(t, func(msg *nats.Msg) {
 		cb(&Msg{*msg})
